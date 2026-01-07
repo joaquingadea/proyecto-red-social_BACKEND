@@ -1,0 +1,1 @@
+Este proyecto es el backend de una aplicación que simula ser una red social.

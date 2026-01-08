@@ -14,6 +14,10 @@ public class Message {
     private String text;
     private LocalDateTime creationDate;
 
+    // FK profile_id
+    // N -> 1 unidireccional
+    // mensajes -> profile
+    // cada mensaje conoce su creador
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;

@@ -38,4 +38,33 @@ public class UserSec {
         this.credentialNotExpired = credentialNotExpired;
         this.roleList = roleList;
     }
+
+    public Set<Role> getRoleList() {
+        return roleList;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public boolean isAccountNotExpired() {
+        return accountNotExpired;
+    }
+
+    public boolean isAccountNotLocked() {
+        return accountNotLocked;
+    }
+
+    public boolean isCredentialNotExpired() {
+        return credentialNotExpired;
+    }
+
 }

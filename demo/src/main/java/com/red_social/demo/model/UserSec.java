@@ -67,4 +67,7 @@ public class UserSec {
         return credentialNotExpired;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

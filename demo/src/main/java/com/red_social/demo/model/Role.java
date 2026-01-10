@@ -32,4 +32,8 @@ public class Role {
     public String getName() {
         return name;
     }
+
+    public void setPermissionList(Set<Permission> permissionsList) {
+        this.permissionList = permissionsList;
+    }
 }

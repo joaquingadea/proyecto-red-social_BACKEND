@@ -7,10 +7,8 @@ import com.red_social.demo.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
+@PreAuthorize("permitAll()")
 @RequestMapping("/role")
 public class RoleController {
 
@@ -37,7 +36,7 @@ public class RoleController {
         Set<Permission> permissionsList = new HashSet<>();
 
         for (Permission per : role.getPermissionList()){
-            Optional<Permission> permissionExists = permissionService.findPermissionByName(per.getName());
+            Optional<Permission> permissionExists = permissionService.findById(per.getId());
             if(permissionExists.isPresent()){
                 permissionsList.add(per);
             }

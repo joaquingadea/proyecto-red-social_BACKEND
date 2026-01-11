@@ -10,4 +10,5 @@ public interface IRoleService {
     Role create(Role role);
     List<Role> findAll();
     void deleteById(Long id);
+    boolean existsById(Long id);
 }

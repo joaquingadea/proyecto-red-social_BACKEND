@@ -20,6 +20,9 @@ public class UserSec {
     private boolean accountNotLocked;
     private boolean credentialNotExpired;
 
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    private Profile profile;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role"
             ,joinColumns = @JoinColumn(name = "user_id")
@@ -29,13 +32,14 @@ public class UserSec {
     public UserSec() {
     }
 
-    public UserSec(String username, String password, boolean enabled, boolean accountNotExpired, boolean accountNotLocked, boolean credentialNotExpired, Set<Role> roleList) {
+    public UserSec(String username, String password, boolean enabled, boolean accountNotExpired, boolean accountNotLocked, boolean credentialNotExpired, Profile profile, Set<Role> roleList) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.accountNotExpired = accountNotExpired;
         this.accountNotLocked = accountNotLocked;
         this.credentialNotExpired = credentialNotExpired;
+        this.profile = profile;
         this.roleList = roleList;
     }
 
@@ -69,5 +73,9 @@ public class UserSec {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

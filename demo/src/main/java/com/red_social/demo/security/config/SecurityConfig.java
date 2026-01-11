@@ -23,7 +23,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())//.authenticated())
                 .httpBasic(Customizer.withDefaults()) // habilita el Basic Auth - hay que configurarlo (paginas login,register,logout,error)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();

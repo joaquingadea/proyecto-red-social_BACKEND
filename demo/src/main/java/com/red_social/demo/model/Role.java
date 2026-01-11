@@ -39,4 +39,8 @@ public class Role {
     public void setPermissionList(Set<Permission> permissionsList) {
         this.permissionList = permissionsList;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

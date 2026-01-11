@@ -25,6 +25,15 @@ public class RoleController {
     @Autowired
     private IPermissionService permissionService;
 
+    @GetMapping
+    public ResponseEntity getRoles(){
+        List<Role> roleList = roleService.findAll();
+        if(roleList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No existen roles");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(roleList);
+    }
+
     @PostMapping
     public ResponseEntity createRole(@RequestBody Role role){
 

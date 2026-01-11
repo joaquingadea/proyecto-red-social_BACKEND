@@ -56,4 +56,9 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(roleService.create(role));
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id){
+        roleService.deleteById(id);
+    }
 }

@@ -10,14 +10,13 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDate creationDate;
 
 
     // FK user_id
-    // 1 a 1 -> profile -> user
+    // 1 a 1 -> profile <-> user
     @OneToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id",nullable = false,unique = true)
     private UserSec user;
 
     public Profile(){

@@ -34,6 +34,14 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.OK).body(roleList);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getRoleById(@PathVariable Long id){
+        Optional<Role> roleOptional = roleService.findById(id);
+        return roleOptional
+                .map((role) -> ResponseEntity.status(HttpStatus.OK).body(role))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+
     @PostMapping
     public ResponseEntity createRole(@RequestBody Role role){
 

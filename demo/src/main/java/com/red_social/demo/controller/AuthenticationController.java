@@ -2,6 +2,9 @@ package com.red_social.demo.controller;
 
 import com.red_social.demo.dto.AuthLoginRequestDTO;
 import com.red_social.demo.dto.AuthLoginResponseDTO;
+import com.red_social.demo.dto.AuthRegisterRequestDTO;
+import com.red_social.demo.repository.IUserSecRepository;
+import com.red_social.demo.service.IUserService;
 import com.red_social.demo.service.UserDetailsServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,16 @@ public class AuthenticationController {
 
     @Autowired
     private UserDetailsServiceImp userDetails;
+    @Autowired
+    private IUserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<AuthLoginResponseDTO> login(@RequestBody @Valid AuthLoginRequestDTO request){
         return new ResponseEntity<>(userDetails.loginUser(request), HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity register(@RequestBody @Valid AuthRegisterRequestDTO request){
+        return new ResponseEntity(userService.registerUser(request),HttpStatus.CREATED);
     }
 }

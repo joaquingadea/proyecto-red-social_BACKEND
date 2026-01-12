@@ -22,8 +22,11 @@ public class Profile {
     public Profile(){
     }
 
-    public Profile(LocalDate creationDate, UserSec user) {
+    public Profile(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public void setUser(UserSec user) {
         this.user = user;
     }
 }

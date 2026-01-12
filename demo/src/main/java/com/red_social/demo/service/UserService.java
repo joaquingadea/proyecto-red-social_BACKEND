@@ -50,6 +50,9 @@ public class UserService implements IUserService{
         if(user.isPresent()){ //el usuario ya existe
             throw new ValidationException("Username alredy exists");
         }
+        if((request.password().length() < 8) || (request.passwordConfirm().length() < 8)){
+            throw new ValidationException("Password must be at least 8 characters");
+        }
         if(!(request.password().equals
                 (request.passwordConfirm()))){ //si las contraseñas no son iguales
             throw new ValidationException("Passwords do not match");

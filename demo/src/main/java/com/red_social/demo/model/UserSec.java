@@ -32,14 +32,13 @@ public class UserSec {
     public UserSec() {
     }
 
-    public UserSec(String username, String password, boolean enabled, boolean accountNotExpired, boolean accountNotLocked, boolean credentialNotExpired, Profile profile, Set<Role> roleList) {
+    public UserSec(String username, String password, boolean enabled, boolean accountNotExpired, boolean accountNotLocked, boolean credentialNotExpired, Set<Role> roleList) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.accountNotExpired = accountNotExpired;
         this.accountNotLocked = accountNotLocked;
         this.credentialNotExpired = credentialNotExpired;
-        this.profile = profile;
         this.roleList = roleList;
     }
 
@@ -75,7 +74,29 @@ public class UserSec {
         this.password = password;
     }
 
-    public void setProfile(Profile profile) {
+    public void addProfile(Profile profile) {
         this.profile = profile;
+        profile.setUser(this);
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setAccountNotExpired(boolean accountNotExpired) {
+        this.accountNotExpired = accountNotExpired;
+    }
+
+    public void setAccountNotLocked(boolean accountNotLocked) {
+        this.accountNotLocked = accountNotLocked;
+    }
+
+    public void setCredentialNotExpired(boolean credentialNotExpired) {
+        this.credentialNotExpired = credentialNotExpired;
+    }
+
 }

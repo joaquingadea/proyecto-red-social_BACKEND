@@ -8,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @PreAuthorize("permitAll()")
@@ -68,5 +64,16 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.create(userSec));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable Long id){
+        boolean userExists = userService.existsById(id);
+        if(userExists){
+            userService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("User successfully deleted!");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User does not exist");
+        }
     }
 }

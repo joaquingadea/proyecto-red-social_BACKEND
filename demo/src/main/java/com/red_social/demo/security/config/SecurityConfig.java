@@ -1,5 +1,8 @@
 package com.red_social.demo.security.config;
 
+import com.red_social.demo.security.config.filter.JwtTokenValidator;
+import com.red_social.demo.utils.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,10 +18,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
         return http
@@ -26,6 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())//.authenticated())
                 .httpBasic(Customizer.withDefaults()) // habilita el Basic Auth - hay que configurarlo (paginas login,register,logout,error)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
                 .build();
     }
     @Bean

@@ -9,13 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@PreAuthorize("permitAll()")
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/permission")
 public class PermissionController {
 
@@ -42,7 +40,7 @@ public class PermissionController {
         return ResponseEntity.status(HttpStatus.OK).body(permissionsList);
     }
 
-    @PostMapping //("/create")
+    @PostMapping("/create")
     public ResponseEntity createPermission(@RequestBody Permission permission){
         Optional<Permission> permissionExist = permissionService.findPermissionByName(permission.getName());
 
@@ -54,6 +52,5 @@ public class PermissionController {
          // Si el permiso no existe lo crea
         return ResponseEntity.status(HttpStatus.CREATED)
                     .body(permissionService.create(permission));
-
     }
 }

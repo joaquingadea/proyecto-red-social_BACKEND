@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("/permission")
 public class PermissionController {
 
@@ -52,5 +52,14 @@ public class PermissionController {
          // Si el permiso no existe lo crea
         return ResponseEntity.status(HttpStatus.CREATED)
                     .body(permissionService.create(permission));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable Long id){
+        permissionService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Successfully deleted!");
+    }
+    @PostMapping
+    public void createPermissions(@RequestBody List<Permission> permissions){
+        permissionService.createPermissions(permissions);
     }
 }

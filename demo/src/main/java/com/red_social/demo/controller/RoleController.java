@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@PreAuthorize("permitAll()")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("/role")
 public class RoleController {
 

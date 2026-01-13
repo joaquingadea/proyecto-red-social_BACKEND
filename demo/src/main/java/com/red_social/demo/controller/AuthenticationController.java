@@ -3,20 +3,20 @@ package com.red_social.demo.controller;
 import com.red_social.demo.dto.AuthLoginRequestDTO;
 import com.red_social.demo.dto.AuthLoginResponseDTO;
 import com.red_social.demo.dto.AuthRegisterRequestDTO;
-import com.red_social.demo.repository.IUserSecRepository;
 import com.red_social.demo.service.IUserService;
 import com.red_social.demo.service.UserDetailsServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@PreAuthorize("permitAll()")
 @RequestMapping("/auth")
 public class AuthenticationController {
 
@@ -31,7 +31,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid AuthRegisterRequestDTO request){
+    public ResponseEntity register(@RequestBody AuthRegisterRequestDTO request){
         return new ResponseEntity(userService.registerUser(request),HttpStatus.CREATED);
     }
 }

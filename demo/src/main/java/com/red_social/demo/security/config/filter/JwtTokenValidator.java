@@ -34,9 +34,16 @@ public class JwtTokenValidator extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
+        String path = request.getServletPath();
+
+        if (path.equals("/auth/login") || path.equals("/auth/register")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (jwt != null){
-            jwt.substring(7);
+            jwt = jwt.substring(7);
             DecodedJWT decodedJWT = jwtUtils.decodedJWT(jwt);
             String username = jwtUtils.getUsername(decodedJWT);
             String authorities = jwtUtils.getSpecificClaim(decodedJWT,"authorities").asString();

@@ -11,4 +11,6 @@ public interface IPermissionService {
     Permission create(Permission permission);
     List<Permission> getPermissions();
     Optional<Permission> findById(Long id);
+    void deleteById(Long id);
+    void createPermissions(List<Permission> permissions);
 }

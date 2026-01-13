@@ -99,4 +99,7 @@ public class UserSec {
         this.credentialNotExpired = credentialNotExpired;
     }
 
+    public Long getId() {
+        return id;
+    }
 }

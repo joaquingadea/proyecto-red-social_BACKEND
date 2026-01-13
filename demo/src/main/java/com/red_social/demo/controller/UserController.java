@@ -1,5 +1,6 @@
 package com.red_social.demo.controller;
 
+import com.red_social.demo.model.Profile;
 import com.red_social.demo.model.Role;
 import com.red_social.demo.model.UserSec;
 import com.red_social.demo.service.IRoleService;
@@ -10,10 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
-@PreAuthorize("permitAll()")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("/user")
 public class UserController {
 
@@ -61,6 +63,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("Los roles pasados no existen");
         }
+
+        Profile profile = new Profile(LocalDate.now());
+        userSec.addProfile(profile);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.create(userSec));

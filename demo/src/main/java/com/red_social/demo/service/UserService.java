@@ -44,18 +44,18 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public AuthRegisterResponseDTO registerUser(@Valid AuthRegisterRequestDTO request){
+    public AuthRegisterResponseDTO registerUser(AuthRegisterRequestDTO request){
 
         Optional<UserSec> user = userRepo.findUserSecEntityByUsername(request.username());
         if(user.isPresent()){ //el usuario ya existe
-            throw new ValidationException("Username alredy exists");
+            throw new IllegalArgumentException("Username alredy exists");
         }
         if((request.password().length() < 8) || (request.passwordConfirm().length() < 8)){
-            throw new ValidationException("Password must be at least 8 characters");
+            throw new IllegalArgumentException("Password must be at least 8 characters");
         }
         if(!(request.password().equals
                 (request.passwordConfirm()))){ //si las contraseñas no son iguales
-            throw new ValidationException("Passwords do not match");
+            throw new IllegalArgumentException("Passwords do not match");
         }
 
 
@@ -89,5 +89,24 @@ public class UserService implements IUserService{
     @Override
     public boolean existsById(Long id) {
         return userRepo.existsById(id);
+    }
+
+    @Override
+    public Optional<UserSec> findById(Long id) {
+        return userRepo.findById(id);
+    }
+
+    @Override
+    public String addRole(UserSec userMod,Role roleAdmin) {
+        userMod.getRoleList().add(roleAdmin);
+        userRepo.save(userMod);
+        return "Se le seteo el rol de admin al usuario con el id: " + userMod.getId();
+    }
+
+    @Override
+    public String removeRole(UserSec userSec, Role role) {
+        userSec.getRoleList().remove(role);
+        userRepo.save(userSec);
+        return "Se elimino el rol ADMIN del usuario con id: "+ userSec.getId();
     }
 }

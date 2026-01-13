@@ -13,4 +13,5 @@ public interface IRoleService {
     void deleteById(Long id);
     boolean existsById(Long id);
     Optional<Role> findById(Long id);
+    Optional<Role> findByName(String admin);
 }

@@ -33,4 +33,14 @@ public class PermissionService implements IPermissionService {
     public Optional<Permission> findById(Long id) {
         return permissionRepository.findById(id);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        permissionRepository.deleteById(id);
+    }
+
+    @Override
+    public void createPermissions(List<Permission> permissions) {
+        permissionRepository.saveAll(permissions);
+    }
 }

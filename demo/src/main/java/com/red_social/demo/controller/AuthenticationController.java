@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/auth")
 public class AuthenticationController {
 
@@ -25,13 +24,20 @@ public class AuthenticationController {
     @Autowired
     private IUserService userService;
 
+    @PreAuthorize("permitAll()")
     @PostMapping("/login")
     public ResponseEntity<AuthLoginResponseDTO> login(@RequestBody @Valid AuthLoginRequestDTO request){
         return new ResponseEntity<>(userDetails.loginUser(request), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody AuthRegisterRequestDTO request){
         return new ResponseEntity(userService.registerUser(request),HttpStatus.CREATED);
+    }
+    @PostMapping("/logout")
+    public ResponseEntity logout(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Successfully logout!");
     }
 }

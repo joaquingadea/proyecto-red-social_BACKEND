@@ -36,7 +36,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/auth/register").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(
+                                "/admin/**",
+                                "/permission/**",
+                                "/role/**",
+                                "/user/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(httpBasic -> httpBasic

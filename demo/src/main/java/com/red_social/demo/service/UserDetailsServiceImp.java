@@ -36,7 +36,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         UserSec userSec = userRepo.findUserSecEntityByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("El usuario " + username + " no existe"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
@@ -78,10 +78,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
     public Authentication authenticate(String username, String password) {
         UserDetails user = this.loadUserByUsername(username);
         if (user == null){
-            throw new BadCredentialsException("Invalid username or password");
+            throw new IllegalArgumentException("Invalid username or password");
         }
         if (!passwordEncoder.matches(password,user.getPassword())){
-            throw new BadCredentialsException("Invalid username or password");
+            throw new IllegalArgumentException("Invalid username or password");
         }
         return new UsernamePasswordAuthenticationToken(username,user.getPassword(),user.getAuthorities());
     }

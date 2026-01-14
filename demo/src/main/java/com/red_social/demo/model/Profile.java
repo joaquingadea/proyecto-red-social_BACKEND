@@ -29,4 +29,8 @@ public class Profile {
     public void setUser(UserSec user) {
         this.user = user;
     }
+
+    public UserSec getUser() {
+        return user;
+    }
 }

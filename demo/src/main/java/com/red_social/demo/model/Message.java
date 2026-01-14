@@ -13,6 +13,7 @@ public class Message {
     private String title;
     private String text;
     private LocalDateTime creationDate;
+    private boolean edited;
 
     // FK profile_id
     // N -> 1 unidireccional
@@ -30,6 +31,38 @@ public class Message {
         this.text = text;
         this.creationDate = creationDate;
         this.profile = profile;
+        this.edited = false;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

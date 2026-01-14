@@ -8,6 +8,7 @@ import com.red_social.demo.model.Message;
 import com.red_social.demo.model.Profile;
 import com.red_social.demo.repository.IMessageRepository;
 import com.red_social.demo.repository.IProfileRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -22,7 +23,7 @@ public class MessageService implements IMessageService{
     private IMessageRepository messageRepository;
 
     @Override
-    public CreateMessageResponseDTO create(CreateMessageRequestDTO message, String userCreator) {
+    public CreateMessageResponseDTO create(@Valid CreateMessageRequestDTO message, String userCreator) {
 
         Profile profile = profileRepository.findByUserUsername(userCreator)
                 .orElseThrow(() -> new RuntimeException("Profile not found"));

@@ -50,13 +50,13 @@ public class PermissionController {
         }
 
          // Si el permiso no existe lo crea
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                     .body(permissionService.create(permission));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity deleteById(@PathVariable Long id){
         permissionService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Successfully deleted!");
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted!");
     }
     @PostMapping
     public void createPermissions(@RequestBody List<Permission> permissions){

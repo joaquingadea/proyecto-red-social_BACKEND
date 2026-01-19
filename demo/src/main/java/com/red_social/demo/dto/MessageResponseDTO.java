@@ -7,6 +7,7 @@ public record MessageResponseDTO(
         String title,
         String text,
         LocalDateTime creationDate,
-        String userCreator
+        String userCreator,
+        boolean edited
 ) {
 }

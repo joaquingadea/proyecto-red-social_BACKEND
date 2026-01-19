@@ -33,7 +33,7 @@ public class AuthenticationController {
     @PreAuthorize("permitAll()")
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody AuthRegisterRequestDTO request){
-        return new ResponseEntity(userService.registerUser(request),HttpStatus.CREATED);
+        return new ResponseEntity(userService.registerUser(request),HttpStatus.OK);
     }
     @PostMapping("/logout")
     public ResponseEntity logout(){

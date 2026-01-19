@@ -41,6 +41,12 @@ public class JwtTokenValidator extends OncePerRequestFilter {
             return;
         }
 
+        // ignorar preflight OPTIONS
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
         String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (jwt != null){
             jwt = jwt.substring(7);

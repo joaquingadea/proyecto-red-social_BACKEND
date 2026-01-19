@@ -5,12 +5,8 @@ import jakarta.validation.constraints.Size;
 import org.springframework.lang.NonNull;
 
 public record CreateMessageRequestDTO(
-        @NotBlank
-        @NonNull
         @Size(max = 75)
         String title,
-        @NotBlank
-        @NonNull
         @Size(max = 250)
         String text
 ) {

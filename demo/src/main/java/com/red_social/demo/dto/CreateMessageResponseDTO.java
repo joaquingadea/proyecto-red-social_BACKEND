@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public record CreateMessageResponseDTO(
         String userCreator,
         Long id,
-        String createdTitle,
-        String createdMessage,
+        String title,
+        String text,
         LocalDateTime creationDate,
         String response,
         boolean status

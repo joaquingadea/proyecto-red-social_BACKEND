@@ -61,7 +61,7 @@ public class RoleController {
 
         role.setPermissionList(permissionsList);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(roleService.create(role));
     }
 

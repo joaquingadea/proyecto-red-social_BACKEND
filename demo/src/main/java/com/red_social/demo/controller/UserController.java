@@ -67,7 +67,7 @@ public class UserController {
         Profile profile = new Profile(LocalDate.now());
         userSec.addProfile(profile);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.create(userSec));
     }
     @DeleteMapping("/{id}")

@@ -1,15 +1,17 @@
 package com.red_social.demo.service;
 
-import com.red_social.demo.dto.CreateMessageRequestDTO;
-import com.red_social.demo.dto.CreateMessageResponseDTO;
-import com.red_social.demo.dto.EditMessageRequestDTO;
-import com.red_social.demo.dto.MessageResponseDTO;
+import com.red_social.demo.dto.*;
+import com.red_social.demo.exception.ResourceNotFoundException;
 import com.red_social.demo.model.Message;
 import com.red_social.demo.model.Profile;
+import com.red_social.demo.model.UserSec;
 import com.red_social.demo.repository.IMessageRepository;
 import com.red_social.demo.repository.IProfileRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -58,7 +60,8 @@ public class MessageService implements IMessageService{
                               m.getTitle(),
                               m.getText(),
                               m.getCreationDate(),
-                              m.getProfile().getUser().getUsername()
+                              m.getProfile().getUser().getUsername(),
+                              m.isEdited()
                       )).toList();
     }
 
@@ -68,11 +71,53 @@ public class MessageService implements IMessageService{
     }
 
     @Override
-    public void edit(Long id, EditMessageRequestDTO requestEdit) {
-        Message messageEdit = messageRepository.findById(id).orElseThrow();
+    public void edit(Long id, EditMessageRequestDTO requestEdit, Authentication authentication) {
+
+        String username = authentication.getName();
+
+        Message messageEdit = messageRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Mensaje con id " + id + " no encontrado"));
+
+        if(!(messageEdit.getProfile().getUser().getUsername()
+                .equals
+                        (username))){
+            throw new AccessDeniedException("No podés editar mensajes ajenos");
+        }
+
         messageEdit.setTitle(requestEdit.title());
         messageEdit.setText(requestEdit.text());
         messageEdit.setEdited(true);
+
         messageRepository.save(messageEdit);
+    }
+
+    @Override
+    public List<MessageResponseDTO> getAllMessages() {
+        return messageRepository.findAll(Sort.by (Sort.Direction.DESC,"creationDate"))
+                .stream()
+                .map(message -> new MessageResponseDTO(
+                        message.getId(),
+                        message.getTitle(),
+                        message.getText(),
+                        message.getCreationDate(),
+                        message.getProfile().getUser().getUsername(),
+                        message.isEdited()
+                ))
+                .toList();
+    }
+
+    @Override
+    public GetEditMessageResponseDTO findById(Long id, Authentication authentication) {
+        String username = authentication.getName();
+
+        Message messageFind = messageRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Mensaje con id " + id + " no encontrado"));
+
+        if(!(messageFind.getProfile().getUser().getUsername()
+                .equals
+                        (username))){
+            throw new AccessDeniedException("No podés editar mensajes ajenos");
+        }
+        return new GetEditMessageResponseDTO(messageFind.getTitle(), messageFind.getText());
     }
 }

@@ -1,10 +1,10 @@
 package com.red_social.demo.service;
 
-import com.red_social.demo.dto.CreateMessageRequestDTO;
-import com.red_social.demo.dto.CreateMessageResponseDTO;
-import com.red_social.demo.dto.EditMessageRequestDTO;
-import com.red_social.demo.dto.MessageResponseDTO;
+import com.red_social.demo.dto.*;
+import com.red_social.demo.model.Message;
 import jakarta.validation.Valid;
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -15,5 +15,9 @@ public interface IMessageService {
 
     void deleteById(Long id);
 
-    void edit(Long id, EditMessageRequestDTO requestEdit);
+    void edit(Long id, EditMessageRequestDTO requestEdit, Authentication authentication);
+
+    List<MessageResponseDTO> getAllMessages();
+
+    GetEditMessageResponseDTO findById(Long id, Authentication authentication);
 }

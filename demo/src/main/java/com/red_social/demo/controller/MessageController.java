@@ -36,7 +36,7 @@ public class MessageController {
     }
     @PreAuthorize("hasAuthority('MESSAGE_READ')")
     @GetMapping
-    public ResponseEntity getAllMessages(){
+    public ResponseEntity getAllMessages(Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(messageService.getAllMessages());
     }

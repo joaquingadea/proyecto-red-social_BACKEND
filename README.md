@@ -1,1 +1,4 @@
-Este proyecto es el backend de una aplicación que simula ser una red social.
+# Simulación de red social
+  Este es el backend realizado para simular una red social, utilizando Spring Security junto con Basic auth y JWT se desarrollo la seguridad del sistema.
+  La aplicación te permite registrarte e iniciar sesión, las contraseñas se almacenan en la base de datos (utilizando MySQL como SGDB) hasheadas mediante BCrypt, luego de la autenticación en el formulario de registro/inicio sesión el usuario recibe su JWT y a partir de eso las requests se autentican a través del JWT. 
+  En pocas palabras el sitio web te permite registrarte/iniciar sesión, enviar mensajes públicos, editarlos, eliminarlos y visualizar tu historial de mensajes propios. Los usuarios por defecto inician teniendo el rol USER, esto les permite ineractuar de la manera previamente mencionada, los admins son los únicos que pueden asignarle el rol de admin a otros usuarios. Los administradores tienen la posibilidad de generar nuevos roles, permisos y tienen la capacidad de eliminar mensajes de otros usuarios.

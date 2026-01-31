@@ -63,7 +63,7 @@ Separar responsabilidades entre controller, service y security
 Simular un entorno real de despliegue en la nube
 
 # 🛠️ Tecnologías utilizadas
-* Backend *
+BACKEND
 
 Java 17+
 
@@ -81,7 +81,7 @@ MySQL
 
 Maven
 
-* Frontend *
+FRONTEND
 
 HTML5
 
@@ -89,7 +89,7 @@ CSS3
 
 JavaScript (Vanilla JS)
 
-* Infraestructura y despliegue *
+INFRAESTRUCTURA Y DESPLIEGUE
 
 Render → Backend
 

@@ -1,7 +1,7 @@
 # 🔴 IMPORTANTE 🔴
 La web esta desplegada con la capa gratuita de render (para el backend), netlify (para el frontend) y railway (para la base de datos MySQL). Por ende las primeras requests que se le hagan a la web pueden tardar entre 2 y 5 minutos debido a no estar constantemente recibiendo requests se pausan los recursos.
 
-🧑‍🤝‍🧑 Simulación de Red Social
+# 🧑‍🤝‍🧑 Simulación de Red Social
 
 Este proyecto consiste en el backend de una aplicación que simula una red social, desarrollado con el objetivo de demostrar el diseño, la arquitectura y la seguridad de una API REST utilizando Spring Boot y Spring Security.
 

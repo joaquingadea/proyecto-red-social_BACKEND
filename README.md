@@ -16,15 +16,15 @@ Una vez autenticado, el usuario recibe un JWT, el cual debe ser enviado en cada 
 
 En términos funcionales, la aplicación permite:
 
-Registrarse e iniciar sesión
+- Registrarse e iniciar sesión
 
-Enviar mensajes públicos
+- Enviar mensajes públicos
 
-Editar y eliminar mensajes propios
+- Editar y eliminar mensajes propios
 
-Visualizar el historial de mensajes del usuario
+- Visualizar el historial de mensajes del usuario
 
-Gestionar roles y permisos (según el tipo de usuario)
+- Gestionar roles y permisos (según el tipo de usuario)
 
 # 🔐 Seguridad y roles
 
@@ -32,19 +32,19 @@ Todos los usuarios nuevos inician con el rol USER
 
 Los usuarios con rol USER pueden:
 
-Crear mensajes
+- Crear mensajes
 
-Editar y eliminar sus propios mensajes
+- Editar y eliminar sus propios mensajes
 
-Visualizar su historial de mensajes
+- Visualizar su historial de mensajes
 
 Los usuarios con rol ADMIN pueden:
 
-Asignar el rol de administrador a otros usuarios
+- Asignar el rol de administrador a otros usuarios
 
-Crear nuevos roles y permisos
+- Crear nuevos roles y permisos
 
-Eliminar mensajes de otros usuarios
+- Eliminar mensajes de otros usuarios
 
 La autorización se basa en roles y permisos, los cuales son evaluados por Spring Security mediante GrantedAuthority.
 
